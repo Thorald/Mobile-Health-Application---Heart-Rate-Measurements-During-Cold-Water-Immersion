@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'history_view.dart';
 import 'connect_view.dart';
 
+// This is the Home view screen
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 

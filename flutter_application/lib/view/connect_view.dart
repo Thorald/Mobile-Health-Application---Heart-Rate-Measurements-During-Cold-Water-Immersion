@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+// This is the Connect view screen
+
 class ConnectView extends StatelessWidget {
   const ConnectView({super.key});
 
