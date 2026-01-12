@@ -22,7 +22,9 @@ class HistoryView extends StatelessWidget {
 
 
 
+
 void main() => runApp(const MyApp());
+
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -33,71 +35,112 @@ class MyApp extends StatelessWidget {
   }
 }
 
+
 class MyStatelessWidget extends StatelessWidget {
   const MyStatelessWidget({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Previous Swims!')),
-      body: _buildSizedBoxWidget(),
+      body: _buildStackWidget(),
     );
   }
 
-  Widget _buildSizedBoxWidget() {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(10.0),
-      child: Column(
-        children: const [
-          SizedBox(
-            width: 300,
-            height: 50,
-            child: Card(
-              color: Color.fromARGB(255, 204, 204, 204),
-              child: Center(child: Text('Swim 1')),
+Widget _buildStackWidget() {
+  return SafeArea(
+    child: Stack(
+      children: [
+        // Your scrollable content
+        SingleChildScrollView(
+          padding: const EdgeInsets.only(top: 20),
+          child: Center(
+            child: Column(
+              children: const [
+                SizedBox(height: 120), // space so logo doesn't overlap title/content
+
+                SizedBox(
+                  width: 300,
+                  height: 50,
+                  child: Card(
+                    color: Color.fromARGB(255, 204, 204, 204),
+                    child: Center(child: Text('Swim 1')),
+                  ),
+                ),
+                SizedBox(
+                  width: 300,
+                  height: 50,
+                  child: Card(
+                    color: Color.fromARGB(255, 204, 204, 204),
+                    child: Center(child: Text('Swim 2')),
+                  ),
+                ),
+                SizedBox(
+                  width: 300,
+                  height: 50,
+                  child: Card(
+                    color: Color.fromARGB(255, 204, 204, 204),
+                    child: Center(child: Text('Swim 3')),
+                  ),
+                ),
+                SizedBox(
+                  width: 300,
+                  height: 50,
+                  child: Card(
+                    color: Color.fromARGB(255, 204, 204, 204),
+                    child: Center(child: Text('Swim 4')),
+                  ),
+                ),
+                SizedBox(
+                  width: 300,
+                  height: 50,
+                  child: Card(
+                    color: Color.fromARGB(255, 204, 204, 204),
+                    child: Center(child: Text('Swim 5')),
+                  ),
+                ),
+                SizedBox(
+                  width: 300,
+                  height: 50,
+                  child: Card(
+                    color: Color.fromARGB(255, 204, 204, 204),
+                    child: Center(child: Text('Swim 6')),
+                  ),
+                ),
+                SizedBox(
+                  width: 300,
+                  height: 50,
+                  child: Card(
+                    color: Color.fromARGB(255, 204, 204, 204),
+                    child: Center(child: Text('Swim 7')),
+                  ),
+                ),
+                SizedBox(
+                  width: 300,
+                  height: 50,
+                  child: Card(
+                    color: Color.fromARGB(255, 204, 204, 204),
+                    child: Center(child: Text('Swim 8')),
+                  ),
+                ),
+              ],
             ),
           ),
-          SizedBox(
-            width: 300,
-            height: 50,
-            child: Card(
-              color: Color.fromARGB(255, 204, 204, 204),
-              child: Center(child: Text('Swim 2')),
-            ),
+        ),
+
+        // Logo pinned to top-right (must be a direct child of Stack)
+        Positioned(
+          top: 12,
+          right: 12,
+          child: Image.asset(
+            'assets/logo.png',
+            width: 90,
+            height: 90,
+            fit: BoxFit.contain,
           ),
-          SizedBox(
-            width: 300,
-            height: 50,
-            child: Card(
-              color: Color.fromARGB(255, 204, 204, 204),
-              child: Center(child: Text('Swim 3')),
-            ),
-          ),
-          SizedBox(
-            width: 300,
-            height: 50,
-            child: Card(
-              color: Color.fromARGB(255, 204, 204, 204),
-              child: Center(child: Text('Swim 4')),
-            ),
-          ),
-          SizedBox(
-            width: 300,
-            height: 50,
-            child: Card(
-              color: Color.fromARGB(255, 204, 204, 204),
-              child: Center(child: Text('Swim 5')),
-            ),
-          ),
-          SizedBox(
-            width: 300,
-            height: 50,
-            child: Card(
-              color: Color.fromARGB(255, 204, 204, 204),
-              child: Center(child: Text('Swim 6')),
-            ),
-          ), 
-        ],
-      ),
-    );
-  }
+        ),
+      ],
+    ),
+  );
+}
 }
