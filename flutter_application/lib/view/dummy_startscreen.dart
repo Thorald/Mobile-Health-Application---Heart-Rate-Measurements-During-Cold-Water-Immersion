@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-// This is the initial statscreen
+// This is the initial startscreen
 
 
 class MyTextWidget extends StatelessWidget {
@@ -35,7 +35,7 @@ class DummyStartScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 36,
-                  fontWeight: FontWeight.w400,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
 
@@ -67,6 +67,3 @@ class DummyStartScreen extends StatelessWidget {
     );
   }
 }
-
-
-

@@ -59,7 +59,7 @@ class ConnectViewScreen extends StatelessWidget {
       body: SafeArea(
         child: Stack(
           children: [
-            // The overview of the swims :D
+            // The overview of devices
             SingleChildScrollView(
               padding: const EdgeInsets.fromLTRB(15, 10, 15, 5),
               child: Center(
@@ -67,7 +67,7 @@ class ConnectViewScreen extends StatelessWidget {
                   children: [
                     // Header area
                     SizedBox(
-                      height: 150, // header area height (adjust)
+                      height: 150,
                       width: double.infinity,
                       child: Stack(
                         children: [
@@ -116,6 +116,7 @@ class ConnectViewScreen extends StatelessWidget {
                     const _DeviceCard('Device 2'),
                     const _DeviceCard('Device 3'),
                     const _DeviceCard('Device 4'),
+                    const _DeviceCard('Device 5'),
                   ],
                 ),
               ),
