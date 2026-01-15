@@ -2,7 +2,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:movesense_plus/movesense_plus.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class MovesenseDeviceConnected extends ChangeNotifier {
   final MovesenseDevice device = MovesenseDevice(
@@ -22,9 +21,9 @@ class MovesenseDeviceConnected extends ChangeNotifier {
       device.connect();
     } else {
       debugPrint("Device connected.");
-      hrSubscription = device.hr.listen((hr) {
-        debugPrint('>> Heart Rate: ${hr.average}, R-R Interval: ${hr.rr} ms');
-      });
+      // hrSubscription = device.hr.listen((hr) {
+      //   debugPrint('>> Heart Rate: ${hr.average}, R-R Interval: ${hr.rr} ms');
+      // });
     }
   }
 

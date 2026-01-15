@@ -23,29 +23,44 @@ class ConnectView extends StatelessWidget {
   }
 }
 
-class ConnectViewCenter extends StatelessWidget {
+class ConnectViewCenter extends StatefulWidget {
   ConnectViewCenter({super.key});
 
+  @override
+  State<ConnectViewCenter> createState() => _ConnectViewCenterState();
+}
+
+class _ConnectViewCenterState extends State<ConnectViewCenter> {
   final MovesenseDeviceConnected vm = MovesenseDeviceConnected();
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Row(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(
-            width: 80,
-            height: 80,
-            child: Transform.scale(
-              scale: 1.4,
-              child: FloatingActionButton(
-                heroTag: "connectbutton",
-                onPressed: () => vm.connect(),
-                child: const Text("Connect to movesense"),
-              ),
+          Transform.scale(
+            scale: 1.4,
+            child: FloatingActionButton(
+              heroTag: "connectbutton",
+              onPressed: () => vm.connect(),
+              child: const Icon(Icons.bluetooth),
             ),
           ),
-          const Text('Your heart rate is:'),
+
+          const SizedBox(height: 20),
+          const Text('Your heart rate is:', style: TextStyle(fontSize: 18)),
+
+          const SizedBox(height: 12),
+
+          StreamBuilder(
+            stream: vm.device.hr,
+            builder: (context, snapshot) => Text(
+              snapshot.hasData ? '${snapshot.data?.average}' : '...',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+          ),
         ],
       ),
     );
