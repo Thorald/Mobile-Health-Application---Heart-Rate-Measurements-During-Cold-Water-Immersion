@@ -10,6 +10,7 @@ class MovesenseDeviceConnected extends ChangeNotifier {
   );
 
   StreamSubscription<MovesenseState>? stateSubscription;
+  StreamSubscription<MovesenseHR>? hrSubscription;
 
   Future<void> init() async {
     device.statusEvents.listen((status) => debugPrint('>> ${status.name}'));
@@ -18,12 +19,13 @@ class MovesenseDeviceConnected extends ChangeNotifier {
   Future<void> connect() async {
     if (!device.isConnected) {
       debugPrint("Connecting...");
-      await device.connect();
+      device.connect();
     } else {
-      final battery = await device.getBatteryStatus();
-      debugPrint('>> Battery level: ${battery.name}');
+      debugPrint("Device connected.");
+      hrSubscription = device.hr.listen((hr) {
+        debugPrint('>> Heart Rate: ${hr.average}, R-R Interval: ${hr.rr} ms');
+      });
     }
-    return debugPrint(">> ${device.deviceInfo}");
   }
 
   @override

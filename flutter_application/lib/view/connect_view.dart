@@ -31,17 +31,22 @@ class ConnectViewCenter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: SizedBox(
-        width: 80,
-        height: 80,
-        child: Transform.scale(
-          scale: 1.4,
-          child: FloatingActionButton(
-            heroTag: "connectbutton",
-            onPressed: () => vm.connect(),
-            child: const Text("Connect to movesense"),
+      child: Row(
+        children: [
+          SizedBox(
+            width: 80,
+            height: 80,
+            child: Transform.scale(
+              scale: 1.4,
+              child: FloatingActionButton(
+                heroTag: "connectbutton",
+                onPressed: () => vm.connect(),
+                child: const Text("Connect to movesense"),
+              ),
+            ),
           ),
-        ),
+          const Text('Your heart rate is:'),
+        ],
       ),
     );
   }
