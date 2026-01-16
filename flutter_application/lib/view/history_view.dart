@@ -1,88 +1,98 @@
 part of '../main.dart';
 
-// This is the History view screen
 class HistoryView extends StatelessWidget {
   const HistoryView({super.key});
+
+  void _onSwimPressed(BuildContext context, String swimName) {
+    // Replace with your navigation / logic
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Pressed: $swimName')),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('History'),
-        automaticallyImplyLeading: false, // remove app bar back button
+        automaticallyImplyLeading: false,
       ),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-        Text('Previous swims!', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+          // Header row: title left, logo right (aligned on same baseline/row)
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Expanded(
+                child: Text(
+                  'Previous swims!',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+              ),
+              Image.asset(
+                'assets/logo.png',
+                height: 40,
+                width: 40,
+                fit: BoxFit.contain,
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
 
-        
-
-        Image(image: AssetImage('assets/logo.png'), height: 50, width: 50),
-        SizedBox(height: 12),
-        ListTile(title: Text('Swim 1')),
-        ListTile(title: Text('Swim 2')),
-        ListTile(title: Text('Swim 3')),
-
-
-
-                    Positioned(
-                             top: 100,
-                             left: 0,
-                             child: Row(
-                               children: [Image.asset(
-                                   'assets/Bluetooth_icon.png',
-                                   width: 30,
-                                   height: 30,
-                                   fit: BoxFit.contain),
-        ],
-        ), 
-                    ),
+          // "Buttons" as tappable tiles
+          Card(
+            child: ListTile(
+              title: const Text('Swim 1'),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () => _onSwimPressed(context, 'Swim 1'),
+            ),
+          ),
+          Card(
+            child: ListTile(
+              title: const Text('Swim 2'),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () => _onSwimPressed(context, 'Swim 2'),
+            ),
+          ),
+          Card(
+            child: ListTile(
+              title: const Text('Swim 3'),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () => _onSwimPressed(context, 'Swim 3'),
+            ),
+          ),
         ],
       ),
-
       bottomNavigationBar: Container(
-         height: 80,
-         padding: const EdgeInsets.symmetric(horizontal: 20),
-         decoration: const BoxDecoration(
-           color: Color(0xFFF2F2F2),
-           border: Border(top: BorderSide(color: Color(0xFFDDDDDD))),
-         ),
-          child: Row(
-           mainAxisAlignment: MainAxisAlignment.end,
-           children: [
-             InkWell(
-               onTap: () => Navigator.pop(context),
-               child: Row(
-                 children: [
-                   Icon(Icons.arrow_back, size: 32),
-                   SizedBox(width: 8),
-                   Text('Back', style: TextStyle(fontSize: 18)),
-
-                    Positioned(
-                             top: 100,
-                             left: 0,
-                             child: Row(
-                               children: [
-                                 Image.asset(
-                                   'assets/Bluetooth_icon.png',
-                                   width: 30,
-                                   height: 30,
-                                   fit: BoxFit.contain,
-                                 ),
-        
-                 ],
-               ),
-             ),
-           ],
-         ),
-       ),
-    ],
-     ),
-    ),
+        height: 80,
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        decoration: const BoxDecoration(
+          color: Color(0xFFF2F2F2),
+          border: Border(top: BorderSide(color: Color(0xFFDDDDDD))),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Image.asset(
+              'assets/Bluetooth_icon.png',
+              width: 30,
+              height: 30,
+              fit: BoxFit.contain,
+            ),
+            InkWell(
+              onTap: () => Navigator.pop(context),
+              child: const Row(
+                children: [
+                  Icon(Icons.arrow_back, size: 32),
+                  SizedBox(width: 8),
+                  Text('Back', style: TextStyle(fontSize: 18)),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
-
-
-
