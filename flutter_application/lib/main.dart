@@ -14,12 +14,12 @@ part 'view_model/connect_view_model.dart';
 part 'model/movesense_device_manager.dart';
 part 'model/during_swim_model.dart';
 
+//Block
+final MovesenseDeviceManager movesenseDeviceManager = MovesenseDeviceManager();
+
 void main() {
   runApp(const MyApp());
 }
-
-//Block
-late final MovesenseDeviceManager movesenseDeviceManager;
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -29,4 +29,3 @@ class MyApp extends StatelessWidget {
     return MaterialApp(title: 'Viking app', home: const HomePage());
   }
 }
-//testing
