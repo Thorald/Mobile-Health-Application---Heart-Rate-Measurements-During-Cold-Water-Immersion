@@ -1,8 +1,8 @@
 part of '../main.dart';
 
 class DuringSwimView extends StatefulWidget {
-  final DuringSwimViewModel model;
-  const DuringSwimView({super.key, required this.model});
+  final DuringSwimViewModel viewModel;
+  const DuringSwimView({super.key, required this.viewModel});
 
   @override
   State<DuringSwimView> createState() => _DuringSwimViewState();
@@ -36,7 +36,7 @@ class _DuringSwimViewState extends State<DuringSwimView> {
                     // TODO: stop recording / stream here
                   },
             child: StreamBuilder(
-              stream: widget.model.pulse,
+              stream: widget.viewModel.pulse,
               builder: (context, snapshot) => Text(
                 'Pulse: ${snapshot.data}',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),

@@ -1,9 +1,11 @@
 part of '../main.dart';
 
 class ConnectViewModel {
-  final MovesenseDeviceConnected movesense;
+  final MovesenseDeviceManager model;
 
-  ConnectViewModel({required this.movesense});
+  void connect() {
+    model.connect();
+  }
 
-  void connect() => movesense.device.connect();
+  ConnectViewModel({required this.model});
 }

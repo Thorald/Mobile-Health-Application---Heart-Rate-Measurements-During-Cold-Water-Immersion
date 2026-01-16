@@ -1,6 +1,6 @@
 part of '../main.dart';
 
-class MovesenseDeviceManager {
+class MovesenseDeviceConnected extends ChangeNotifier {
   final MovesenseDevice device = MovesenseDevice(
     address: '734F40F9-DB19-A046-EA83-EB81CA989B50',
   );

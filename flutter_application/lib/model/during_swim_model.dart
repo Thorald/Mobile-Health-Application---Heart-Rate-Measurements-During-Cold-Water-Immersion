@@ -1,5 +1,6 @@
 part of '../main.dart';
 
 class DuringSwimModel {
-  Stream<int> pulse = bloc.movesense.device.hr;
+  Stream<int> get pulse =>
+      bloc.movesenseDeviceConnected.device.hr.map((hr) => hr.average);
 }
