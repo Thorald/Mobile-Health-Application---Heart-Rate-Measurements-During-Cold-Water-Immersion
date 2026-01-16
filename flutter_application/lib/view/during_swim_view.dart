@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
+part of '../main.dart';
 
 class DuringSwimView extends StatefulWidget {
-  const DuringSwimView({super.key});
+  final DuringSwimViewModel model;
+  const DuringSwimView({super.key, required this.model});
 
   @override
   State<DuringSwimView> createState() => _DuringSwimViewState();
@@ -34,9 +35,12 @@ class _DuringSwimViewState extends State<DuringSwimView> {
 
                     // TODO: stop recording / stream here
                   },
-            child: const Text(
-              'STOP',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            child: StreamBuilder(
+              stream: widget.model.pulse,
+              builder: (context, snapshot) => Text(
+                'Pulse: ${snapshot.data}',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
             ),
           ),
         ),

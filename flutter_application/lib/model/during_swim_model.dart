@@ -1,1 +1,5 @@
-import 'package:flutter_application/view/during_swim_view.dart';
+part of '../main.dart';
+
+class DuringSwimModel {
+  Stream<int> pulse = bloc.movesense.device.hr;
+}
