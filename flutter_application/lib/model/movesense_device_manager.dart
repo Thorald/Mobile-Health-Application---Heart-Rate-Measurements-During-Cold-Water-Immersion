@@ -8,11 +8,11 @@ class MovesenseDeviceManager extends ChangeNotifier {
   StreamSubscription<MovesenseState>? stateSubscription;
   StreamSubscription<MovesenseHR>? hrSubscription;
 
-  // final _hrController = StreamController<MovesenseHR>.broadcast();
-  // Stream<MovesenseHR> get hrStream => _hrController.stream;
-
   Future<void> init() async {
-    device.statusEvents.listen((status) => debugPrint('>> ${status.name}'));
+    device.statusEvents.listen((status) {
+      debugPrint('>> ${status.name}');
+      notifyListeners();
+    });
   }
 
   Future<void> connect() async {
@@ -21,9 +21,6 @@ class MovesenseDeviceManager extends ChangeNotifier {
       device.connect();
     } else {
       debugPrint("Device connected.");
-      // hrSubscription = device.hr.listen((hr) {
-      //   debugPrint('>> Heart Rate: ${hr.average}, R-R Interval: ${hr.rr} ms');
-      // });
     }
   }
 

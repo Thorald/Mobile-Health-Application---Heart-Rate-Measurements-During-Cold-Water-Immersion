@@ -27,7 +27,11 @@ final block = Block();
 
 // ------------MAIN------------
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await block.movesenseDeviceManager.init();
+
   runApp(const MyApp());
 }
 

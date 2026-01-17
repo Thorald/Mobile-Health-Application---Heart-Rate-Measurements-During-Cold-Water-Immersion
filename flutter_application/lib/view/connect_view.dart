@@ -34,26 +34,35 @@ class ConnectViewCenter extends StatefulWidget {
 
 class _ConnectViewCenterState extends State<ConnectViewCenter> {
   @override
+  void initState() {
+    super.initState();
+    widget.viewModel.bind(() => setState(() {}));
+  }
+
+  @override
+  void dispose() {
+    widget.viewModel.unbind();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final vm = widget.viewModel;
 
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Transform.scale(
-            scale: 1.4,
-            child: FloatingActionButton(
-              heroTag: "connectbutton",
-              onPressed: vm.connect,
-              child: const Icon(Icons.bluetooth),
-            ),
+          FloatingActionButton(
+            heroTag: "connectbutton",
+            onPressed: vm.connect,
+            child: const Icon(Icons.bluetooth),
           ),
-
           const SizedBox(height: 20),
-          const Text('Your heart rate is:', style: TextStyle(fontSize: 18)),
-          const SizedBox(height: 12),
+          Text(
+            'Connected: ${vm.isConnected}',
+            style: const TextStyle(fontSize: 18),
+          ),
         ],
       ),
     );
