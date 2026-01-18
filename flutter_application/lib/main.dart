@@ -14,7 +14,7 @@ part 'view_model/home_viewmodel.dart';
 part 'view_model/duringswim_viewmodel.dart';
 
 part 'model/movesense_device_manager.dart';
-part 'model/during_swim_model.dart';
+part 'model/bathingevent.dart';
 
 // -----------BLOCK-----------
 

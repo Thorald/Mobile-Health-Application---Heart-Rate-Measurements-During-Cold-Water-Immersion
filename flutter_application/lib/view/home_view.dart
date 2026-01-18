@@ -54,6 +54,9 @@ class HomePage extends StatelessWidget {
           ElevatedButton(
             onPressed: () {
               final connectViewModel = ConnectViewModel();
+              block.movesenseDeviceManager.addListener(
+                connectViewModel.onDeviceChanged,
+              );
               Navigator.push(
                 context,
                 MaterialPageRoute(

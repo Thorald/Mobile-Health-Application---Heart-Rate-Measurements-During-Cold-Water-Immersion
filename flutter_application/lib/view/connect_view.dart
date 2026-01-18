@@ -23,27 +23,10 @@ class ConnectView extends StatelessWidget {
   }
 }
 
-class ConnectViewCenter extends StatefulWidget {
+class ConnectViewCenter extends StatelessWidget {
   final ConnectViewModel viewModel;
 
   const ConnectViewCenter({super.key, required this.viewModel});
-
-  @override
-  State<ConnectViewCenter> createState() => _ConnectViewCenterState();
-}
-
-class _ConnectViewCenterState extends State<ConnectViewCenter> {
-  @override
-  void initState() {
-    super.initState();
-    widget.viewModel.bind(() => setState(() {}));
-  }
-
-  @override
-  void dispose() {
-    widget.viewModel.unbind();
-    super.dispose();
-  }
 
   String _statusText(ConnectViewModel vm) {
     if (vm.isConnected) return 'Connected';
@@ -53,21 +36,27 @@ class _ConnectViewCenterState extends State<ConnectViewCenter> {
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = widget.viewModel;
-
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          FloatingActionButton(
-            heroTag: "connectbutton",
-            onPressed: viewModel.connect,
-            child: const Icon(Icons.bluetooth),
+    return ListenableBuilder(
+      listenable: viewModel,
+      builder: (context, _) {
+        return Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              FloatingActionButton(
+                heroTag: "connectbutton",
+                onPressed: viewModel.connect,
+                child: const Icon(Icons.bluetooth),
+              ),
+              const SizedBox(height: 20),
+              Text(
+                _statusText(viewModel),
+                style: const TextStyle(fontSize: 18),
+              ),
+            ],
           ),
-          const SizedBox(height: 20),
-          Text(_statusText(viewModel), style: const TextStyle(fontSize: 18)),
-        ],
-      ),
+        );
+      },
     );
   }
 }

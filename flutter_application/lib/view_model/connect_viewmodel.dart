@@ -1,35 +1,23 @@
 part of '../main.dart';
 
-class ConnectViewModel {
-  VoidCallback? _onChange;
+class ConnectViewModel extends ChangeNotifier {
   bool _isConnecting = false;
-
-  void bind(VoidCallback onChange) {
-    _onChange = onChange;
-    block.movesenseDeviceManager.addListener(_notify);
-  }
-
-  void unbind() {
-    block.movesenseDeviceManager.removeListener(_notify);
-    _onChange = null;
-  }
-
-  void _notify() {
-    // device changed → stop "connecting" if now connected
-    if (block.movesenseDeviceManager.device.isConnected) {
-      _isConnecting = false;
-    }
-    _onChange?.call();
-  }
 
   Future<void> connect() async {
     if (_isConnecting || isConnected) return;
 
     _isConnecting = true;
-    _onChange?.call();
+    notifyListeners();
 
     await block.movesenseDeviceManager.connect();
-    // final state will come via notify()
+    // final state will come from device listener
+  }
+
+  void onDeviceChanged() {
+    if (block.movesenseDeviceManager.device.isConnected) {
+      _isConnecting = false;
+    }
+    notifyListeners();
   }
 
   bool get isConnected => block.movesenseDeviceManager.device.isConnected;
