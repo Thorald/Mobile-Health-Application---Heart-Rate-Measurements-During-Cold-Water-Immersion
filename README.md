@@ -26,8 +26,9 @@ The app consists of the following main views:
 
 2. Home View
    - User presses START
-   - A new DuringswimViewModel is created
+   - Transitions to "During Swim View"
    - A new BathingEvent is instantiated with the current time
+
 
 3. During Swim View
    - Live heart rate is shown using a stream
