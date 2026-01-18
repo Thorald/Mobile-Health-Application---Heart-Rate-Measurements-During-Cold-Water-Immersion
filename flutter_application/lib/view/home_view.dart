@@ -1,5 +1,4 @@
 part of '../main.dart';
-// This is the Home view screen
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

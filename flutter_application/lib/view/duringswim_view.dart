@@ -14,11 +14,11 @@ class _DuringSwimViewState extends State<DuringSwimView> {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      canPop: hasStopped, // controls system back
+      canPop: hasStopped,
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Swimming'),
-          automaticallyImplyLeading: false, // remove app bar back button
+          automaticallyImplyLeading: false,
         ),
         body: Center(
           child: Column(
@@ -70,6 +70,8 @@ class _DuringSwimViewState extends State<DuringSwimView> {
                   );
                 },
               ),
+
+              // TIME ELAPSED DISPLAY
               StreamBuilder<int>(
                 stream: widget.viewModel.elapsedSeconds,
                 builder: (context, snapshot) {

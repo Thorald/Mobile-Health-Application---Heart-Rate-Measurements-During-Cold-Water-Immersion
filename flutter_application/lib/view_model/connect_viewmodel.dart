@@ -10,7 +10,6 @@ class ConnectViewModel extends ChangeNotifier {
     notifyListeners();
 
     await block.movesenseDeviceManager.connect();
-    // final state will come from device listener
   }
 
   void onDeviceChanged() {

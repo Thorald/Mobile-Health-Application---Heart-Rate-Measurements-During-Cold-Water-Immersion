@@ -1,6 +1,5 @@
 part of '../main.dart';
 
-// This is the originalConnect view screen
 class ConnectView extends StatelessWidget {
   final ConnectViewModel viewModel;
 
