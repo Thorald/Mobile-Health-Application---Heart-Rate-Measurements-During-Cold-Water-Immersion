@@ -3,96 +3,148 @@ part of '../main.dart';
 class HistoryView extends StatelessWidget {
   const HistoryView({super.key});
 
-  void _onSwimPressed(BuildContext context, String swimName) {
-    // Replace with your navigation / logic
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Pressed: $swimName')),
-    );
+  Future<List<DateTime>> _loadBathingEvents() async {
+    final records = await bathingEventStore.find(block.database);
+
+    return records.map((record) {
+      final isoString = record.value['eventTimeStarted'] as String;
+      return DateTime.parse(isoString).toLocal();
+    }).toList();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('History'),
-        automaticallyImplyLeading: false,
-      ),
-      body: ListView(
-        padding: const EdgeInsets.all(16),
-        children: [
-          // Header row: title left, logo right (aligned on same baseline/row)
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Expanded(
-                child: Text(
-                  'Previous swims!',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-              ),
-              Image.asset(
-                'assets/logo.png',
-                height: 40,
-                width: 40,
-                fit: BoxFit.contain,
-              ),
-            ],
-          ),
-          const SizedBox(height: 12),
+      appBar: AppBar(title: const Text('History')),
+      body: FutureBuilder<List<DateTime>>(
+        future: _loadBathingEvents(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return const Center(child: CircularProgressIndicator());
+          }
 
-          // "Buttons" as tappable tiles
-          Card(
-            child: ListTile(
-              title: const Text('Swim 1'),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () => _onSwimPressed(context, 'Swim 1'),
-            ),
-          ),
-          Card(
-            child: ListTile(
-              title: const Text('Swim 2'),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () => _onSwimPressed(context, 'Swim 2'),
-            ),
-          ),
-          Card(
-            child: ListTile(
-              title: const Text('Swim 3'),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () => _onSwimPressed(context, 'Swim 3'),
-            ),
-          ),
-        ],
-      ),
-      bottomNavigationBar: Container(
-        height: 80,
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        decoration: const BoxDecoration(
-          color: Color(0xFFF2F2F2),
-          border: Border(top: BorderSide(color: Color(0xFFDDDDDD))),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Image.asset(
-              'assets/Bluetooth_icon.png',
-              width: 30,
-              height: 30,
-              fit: BoxFit.contain,
-            ),
-            InkWell(
-              onTap: () => Navigator.pop(context),
-              child: const Row(
-                children: [
-                  Icon(Icons.arrow_back, size: 32),
-                  SizedBox(width: 8),
-                  Text('Back', style: TextStyle(fontSize: 18)),
-                ],
-              ),
-            ),
-          ],
-        ),
+          final events = snapshot.data!;
+
+          if (events.isEmpty) {
+            return const Center(child: Text('No swims yet'));
+          }
+
+          return ListView.builder(
+            itemCount: events.length,
+            itemBuilder: (context, index) {
+              final dateTime = events[index];
+
+              return ListTile(
+                leading: const Icon(Icons.pool),
+                title: Text(
+                  '${dateTime.day}-${dateTime.month}-${dateTime.year}',
+                ),
+                subtitle: Text(
+                  '${dateTime.hour.toString().padLeft(2, '0')}:'
+                  '${dateTime.minute.toString().padLeft(2, '0')}',
+                ),
+              );
+            },
+          );
+        },
       ),
     );
   }
 }
+
+// class HistoryView extends StatelessWidget {
+//   const HistoryView({super.key});
+
+//   void _onSwimPressed(BuildContext context, String swimName) {
+//     // Replace with your navigation / logic
+//     ScaffoldMessenger.of(context).showSnackBar(
+//       SnackBar(content: Text('Pressed: $swimName')),
+//     );
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: const Text('History'),
+//         automaticallyImplyLeading: false,
+//       ),
+//       body: ListView(
+//         padding: const EdgeInsets.all(16),
+//         children: [
+//           // Header row: title left, logo right (aligned on same baseline/row)
+//           Row(
+//             crossAxisAlignment: CrossAxisAlignment.center,
+//             children: [
+//               const Expanded(
+//                 child: Text(
+//                   'Previous swims!',
+//                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+//                 ),
+//               ),
+//               Image.asset(
+//                 'assets/logo.png',
+//                 height: 40,
+//                 width: 40,
+//                 fit: BoxFit.contain,
+//               ),
+//             ],
+//           ),
+//           const SizedBox(height: 12),
+
+//           // "Buttons" as tappable tiles
+//           Card(
+//             child: ListTile(
+//               title: const Text('Swim 1'),
+//               trailing: const Icon(Icons.chevron_right),
+//               onTap: () => _onSwimPressed(context, 'Swim 1'),
+//             ),
+//           ),
+//           Card(
+//             child: ListTile(
+//               title: const Text('Swim 2'),
+//               trailing: const Icon(Icons.chevron_right),
+//               onTap: () => _onSwimPressed(context, 'Swim 2'),
+//             ),
+//           ),
+//           Card(
+//             child: ListTile(
+//               title: const Text('Swim 3'),
+//               trailing: const Icon(Icons.chevron_right),
+//               onTap: () => _onSwimPressed(context, 'Swim 3'),
+//             ),
+//           ),
+//         ],
+//       ),
+//       bottomNavigationBar: Container(
+//         height: 80,
+//         padding: const EdgeInsets.symmetric(horizontal: 20),
+//         decoration: const BoxDecoration(
+//           color: Color(0xFFF2F2F2),
+//           border: Border(top: BorderSide(color: Color(0xFFDDDDDD))),
+//         ),
+//         child: Row(
+//           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//           children: [
+//             Image.asset(
+//               'assets/Bluetooth_icon.png',
+//               width: 30,
+//               height: 30,
+//               fit: BoxFit.contain,
+//             ),
+//             InkWell(
+//               onTap: () => Navigator.pop(context),
+//               child: const Row(
+//                 children: [
+//                   Icon(Icons.arrow_back, size: 32),
+//                   SizedBox(width: 8),
+//                   Text('Back', style: TextStyle(fontSize: 18)),
+//                 ],
+//               ),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }

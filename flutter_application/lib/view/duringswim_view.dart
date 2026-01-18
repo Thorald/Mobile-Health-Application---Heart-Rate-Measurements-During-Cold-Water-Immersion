@@ -35,11 +35,12 @@ class _DuringSwimViewState extends State<DuringSwimView> {
                 ),
                 onPressed: hasStopped
                     ? null
-                    : () {
+                    : () async {
                         setState(() {
                           hasStopped = true;
                         });
-                        // TODO: stop recording / stream here
+
+                        await widget.viewModel.stopAndSave();
                       },
                 child: const Text(
                   'STOP',

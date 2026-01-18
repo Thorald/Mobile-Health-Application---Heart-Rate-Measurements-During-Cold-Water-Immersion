@@ -5,6 +5,9 @@ PODS:
     - Movesense
     - SwiftProtobuf
   - Movesense (3.33.1)
+  - path_provider_foundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
   - permission_handler_apple (9.3.0):
     - Flutter
   - SwiftProtobuf (1.33.3)
@@ -13,6 +16,7 @@ DEPENDENCIES:
   - Flutter (from `Flutter`)
   - mdsflutter (from `.symlinks/plugins/mdsflutter/ios`)
   - Movesense (from `https://bitbucket.org/movesense/movesense-mobile-lib.git`)
+  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
 
 SPEC REPOS:
@@ -26,6 +30,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/mdsflutter/ios"
   Movesense:
     :git: https://bitbucket.org/movesense/movesense-mobile-lib.git
+  path_provider_foundation:
+    :path: ".symlinks/plugins/path_provider_foundation/darwin"
   permission_handler_apple:
     :path: ".symlinks/plugins/permission_handler_apple/ios"
 
@@ -38,6 +44,7 @@ SPEC CHECKSUMS:
   Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
   mdsflutter: bd3c0b3335d50947d1a192cf70f930e0fb04a766
   Movesense: dc64047c1feb856b7f7ac6ea2c67685350d99dd5
+  path_provider_foundation: bb55f6dbba17d0dccd6737fe6f7f34fbd0376880
   permission_handler_apple: 4ed2196e43d0651e8ff7ca3483a069d469701f2d
   SwiftProtobuf: e1b437c8e31a4c5577b643249a0bb62ed4f02153
 

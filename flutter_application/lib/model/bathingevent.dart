@@ -1,5 +1,11 @@
 part of '../main.dart';
 
 class BathingEvent {
-  DateTime eventTimeStarted = DateTime.now();
+  final DateTime eventTimeStarted;
+
+  BathingEvent() : eventTimeStarted = DateTime.now();
+
+  Map<String, dynamic> toMap() {
+    return {'eventTimeStarted': eventTimeStarted.toUtc().toIso8601String()};
+  }
 }
