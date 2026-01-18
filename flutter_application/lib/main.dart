@@ -46,6 +46,9 @@ void main() async {
   final appDir = await getApplicationDocumentsDirectory();
   final dbPath = join(appDir.path, 'viking_app.db');
 
+  //Uncomment here to delete database:
+  //await databaseFactoryIo.deleteDatabase(dbPath);
+
   block.database = await databaseFactoryIo.openDatabase(dbPath);
 
   runApp(const MyApp());
